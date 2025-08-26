@@ -1,0 +1,29 @@
+package co.com.pragma.challenge.model.shared;
+
+import co.com.pragma.challenge.model.exception.EmptyFieldException;
+import co.com.pragma.challenge.model.exception.InvalidValueException;
+import co.com.pragma.challenge.model.exception.NullFieldException;
+import co.com.pragma.challenge.model.exception.codes.ExceptionCode;
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
+public class ValidateArgument {
+
+    public void validateNotNull(Object object, String message) {
+        if (object == null) {
+            throw new NullFieldException(ExceptionCode.NULL_FIELD, message);
+        }
+    }
+
+    public void validateStringNotEmpty(String string, String message) {
+        if (string == null || string.isEmpty()) {
+            throw new EmptyFieldException(ExceptionCode.EMPTY_FIELD, message);
+        }
+    }
+
+    public void validateRange(int number, int min, int max, String message) {
+        if (number < min || number > max) {
+            throw new InvalidValueException(ExceptionCode.INVALID_VALUE ,message);
+        }
+    }
+}
